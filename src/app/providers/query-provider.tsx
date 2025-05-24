@@ -1,17 +1,18 @@
+import { ReactNode } from 'react';
+
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ReactNode } from 'react';
 
 interface QueryProviderProps {
   children: ReactNode;
 }
 
-// Create a client
+// Create a client with v5 syntax
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
       staleTime: 60 * 1000, // 1 minute
-      cacheTime: 5 * 60 * 1000, // 5 minutes
+      gcTime: 5 * 60 * 1000, // 5 minutes (renamed from cacheTime in v5)
       refetchOnWindowFocus: true,
       refetchOnMount: true,
       refetchOnReconnect: true,

@@ -1,13 +1,14 @@
-import { zodResolver } from '@hookform/resolvers/zod';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-import { Button } from '@components/atoms/Button';
-import { Input } from '@components/atoms/Input';
-import { Form } from '@components/molecules/Form';
-import { FormField } from '@components/molecules/FormField';
+import { Button } from '@components/atoms/Button/Button';
+import { Input } from '@components/atoms/Input/Input';
+import { Form } from '@components/molecules/Form/Form';
+import { FormField } from '@components/molecules/FormField/FormField';
+import { zodResolver } from '@hookform/resolvers/zod';
+
 import { useAuth } from '../hooks/useAuth';
 import { LoginCredentials, loginCredentialsSchema } from '../types/auth.types';
 

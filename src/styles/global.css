@@ -1,6 +1,5 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+/* src/styles/global.css */
+@import "tailwindcss";
 
 @layer base {
   :root {
@@ -71,10 +70,7 @@
 
     --color-border: 55 65 81; /* Gray-700 */
   }
-}
 
-
-@layer base {
   /* Remove arrows from number inputs */
   input[type='number']::-webkit-outer-spin-button,
   input[type='number']::-webkit-inner-spin-button {
@@ -83,6 +79,7 @@
   }
   input[type='number'] {
     -moz-appearance: textfield;
+    appearance: textfield;
   }
 }
 

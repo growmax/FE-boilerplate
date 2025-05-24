@@ -1,10 +1,12 @@
-import { ReportHandler } from 'web-vitals';
+import { Metric } from 'web-vitals';
 
-export const reportWebVitals = (onPerfEntry?: ReportHandler): void => {
+export const reportWebVitals = (
+  onPerfEntry?: (metric: Metric) => void
+): void => {
   if (onPerfEntry && typeof onPerfEntry === 'function') {
-    import('web-vitals').then(({ onCLS, onFID, onFCP, onLCP, onTTFB }) => {
+    import('web-vitals').then(({ onCLS, onINP, onFCP, onLCP, onTTFB }) => {
       onCLS(onPerfEntry);
-      onFID(onPerfEntry);
+      onINP(onPerfEntry); // Replaces onFID - measures interaction responsiveness
       onFCP(onPerfEntry);
       onLCP(onPerfEntry);
       onTTFB(onPerfEntry);

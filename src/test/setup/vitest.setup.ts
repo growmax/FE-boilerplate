@@ -1,7 +1,8 @@
+// src/test/setup/vitest.setup.ts
 import '@testing-library/jest-dom/vitest';
 import { cleanup } from '@testing-library/react';
 import { setupServer } from 'msw/node';
-import { afterAll, afterEach, beforeAll } from 'vitest';
+import { afterAll, afterEach, beforeAll, vi } from 'vitest';
 
 // Import your MSW handlers here
 import { handlers } from '../mocks/handlers';
@@ -68,8 +69,8 @@ class MockResizeObserver {
 }
 
 // Assign mocks to global
-window.IntersectionObserver = MockIntersectionObserver;
-window.ResizeObserver = MockResizeObserver;
+global.IntersectionObserver = MockIntersectionObserver;
+global.ResizeObserver = MockResizeObserver;
 
 // Mock matchMedia
 Object.defineProperty(window, 'matchMedia', {

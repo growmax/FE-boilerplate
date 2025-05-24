@@ -1,26 +1,42 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ],
     "compilerOptions": {
-    "target": "ES2020",
-    "useDefineForClassFields": true,
-    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    // Target & Module
+    "target": "ES2022",
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
     "module": "ESNext",
-    "skipLibCheck": true,
     "moduleResolution": "bundler",
+
+    // TypeScript Features
+    "jsx": "react-jsx",
+    "allowJs": true,
+    "checkJs": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx",
+    "verbatimModuleSyntax": false,
+    "moduleDetection": "force",
+
+    // Type Checking
     "strict": true,
+    "noImplicitAny": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitOverride": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true,
+    "noUncheckedIndexedAccess": true, // Important for array access safety
+    "exactOptionalPropertyTypes": true,
+
+     // Output
+     "noEmit": true,
+     "declaration": true,
+     "skipLibCheck": true,
+     "forceConsistentCasingInFileNames": true,
+
+    "useDefineForClassFields": true,
     "baseUrl": "./src",
     "paths": {
       "@/*": ["*"],
@@ -36,13 +52,16 @@
       "@config/*": ["config/*"],
       "@utils/*": ["utils/*"], 
     },
-      "include": [
-        "src",
-        "vite.config.ts",
-        "cypress",
-        ".eslintrc.cjs",
-        "vitest.config.ts"
-    ],
-    "types": ["vitest/globals", "node", "cypress", "react"]
-  }
+  },
+  "include": [
+    "src/**/*",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "cypress/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "build"
+  ]
 }

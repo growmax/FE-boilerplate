@@ -1,28 +1,27 @@
+// src/test/utils/test-providers.tsx
 import { ReactNode } from 'react';
-import {
-  I18nextProvider as ReactI18nextProvider,
-  initReactI18next,
-} from 'react-i18next';
+import { I18nextProvider as ReactI18nextProvider } from 'react-i18next';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 
 import {
   QueryClient,
   QueryClientProvider as TanStackQueryClientProvider,
 } from '@tanstack/react-query';
-import i18n from 'i18next';
+
+import { createTestI18n } from './i18n';
 
 // Router Provider for tests
-interface MemoryRouterProviderProps {
+interface TestMemoryRouterProviderProps {
   children: ReactNode;
   routerOptions?: {
     initialEntries?: string[];
   };
 }
 
-export const MemoryRouterProvider = ({
+export const TestMemoryRouterProvider = ({
   children,
   routerOptions = { initialEntries: ['/'] },
-}: MemoryRouterProviderProps) => {
+}: TestMemoryRouterProviderProps) => {
   return (
     <MemoryRouter {...routerOptions}>
       <Routes>
@@ -33,12 +32,12 @@ export const MemoryRouterProvider = ({
 };
 
 // Query Client Provider for tests
-interface QueryClientProviderProps {
+interface TestQueryClientProviderProps {
   children: ReactNode;
   client?: QueryClient;
 }
 
-export const QueryClientProvider = ({
+export const TestQueryClientProvider = ({
   children,
   client = new QueryClient({
     defaultOptions: {
@@ -48,9 +47,12 @@ export const QueryClientProvider = ({
         staleTime: 0,
         refetchOnWindowFocus: false,
       },
+      mutations: {
+        retry: false,
+      },
     },
   }),
-}: QueryClientProviderProps) => {
+}: TestQueryClientProviderProps) => {
   return (
     <TanStackQueryClientProvider client={client}>
       {children}
@@ -59,29 +61,14 @@ export const QueryClientProvider = ({
 };
 
 // i18n Provider for tests
-interface I18nextProviderProps {
+interface TestI18nextProviderProps {
   children: ReactNode;
 }
 
-// Initialize i18n instance for tests
-const testI18n = i18n.createInstance();
-testI18n.use(initReactI18next).init({
-  lng: 'en',
-  fallbackLng: 'en',
-  ns: ['common'],
-  defaultNS: 'common',
-  resources: {
-    en: {
-      common: {},
-    },
-  },
-  interpolation: {
-    escapeValue: false,
-  },
-});
-
-export const I18nextProvider = ({ children }: I18nextProviderProps) => {
+export const TestI18nextProvider = ({ children }: TestI18nextProviderProps) => {
   return (
-    <ReactI18nextProvider i18n={testI18n}>{children}</ReactI18nextProvider>
+    <ReactI18nextProvider i18n={createTestI18n()}>
+      {children}
+    </ReactI18nextProvider>
   );
 };
